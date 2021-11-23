@@ -236,7 +236,7 @@
 	$.getJSON("<?= base_url() ?>/assets/provinsi_poligon.geojson", function(kode) {
 		L.geoJson(kode, {
 			style: function(feature) {
-				var fillColor,kode = feature.properties.kode;
+				var fillColor, kode = feature.properties.kode;
 				if (kode > 21) fillColor = "#006837";
 				else if (kode > 20) fillColor = "#fec44f"
 				else if (kode > 19) fillColor = "#c2e699"
@@ -272,4 +272,37 @@
 			}
 		}).addTo(provin);
 	});
+
+	const legend = L.control.Legend({
+			position: "bottomright",
+			title: "Keterangan",
+			collapsed: true,
+			symbolWidth: 24,
+			opacity: 1,
+			column: 1,
+			legends: [{
+				label: "Ibu Kota Provinsi",
+				type: "image",
+				url: "<?= base_url() ?>/assets/marker-1.png",
+			}, {
+				label: "Jaringan Sungai",
+				type: "polyline",
+				color: "#f2051d",
+				fillColor: "#f2051d",
+				weight: 2
+			}, {
+
+				title: "Jaringan Sungai"
+
+			}, {
+				label: "Polygon Provinsi",
+				font: 29,
+				type: "polygon",
+				sides: 4,
+				color: "#FF0000",
+				fillColor: "#FF0000",
+				weight: 2
+			}]
+		})
+		.addTo(map);
 </script>
